@@ -1,6 +1,6 @@
 from __future__ import division
 
-from models import *
+from models_circle import *
 from utils.logger import *
 from utils.utils import *
 from utils.datasets import *
@@ -76,13 +76,14 @@ if __name__ == "__main__":
 
     optimizer = torch.optim.Adam(model.parameters())
 
+    #modify
+    #
     metrics = [
         "grid_size",
         "loss",
         "x",
         "y",
-        "w",
-        "h",
+        "d",
         "conf",
         "cls",
         "cls_acc",
@@ -126,7 +127,7 @@ if __name__ == "__main__":
                 row_metrics = [formats[metric] % yolo.metrics.get(metric, 0) for yolo in model.yolo_layers]
                 metric_table += [[metric, *row_metrics]]
 
-#                 Tensorboard logging
+#               Tensorboard logging
                 tensorboard_log = []
                 for j, yolo in enumerate(model.yolo_layers):
                     for name, metric in yolo.metrics.items():
@@ -157,7 +158,7 @@ if __name__ == "__main__":
                 conf_thres=0.5,
                 nms_thres=0.5,
                 img_size=opt.img_size,
-                batch_size=8,
+                batch_size=2,
             )
             evaluation_metrics = [
                 ("val_precision", precision.mean()),
@@ -166,7 +167,6 @@ if __name__ == "__main__":
                 ("val_f1", f1.mean()),
             ]
             logger.list_of_scalars_summary(evaluation_metrics, epoch)
-
             # Print class APs and mAP
             ap_table = [["Index", "Class name", "AP"]]
             for i, c in enumerate(ap_class):
