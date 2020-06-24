@@ -161,7 +161,7 @@ https://pjreddie.com/yolo/.
 # circle-yolov3
 Modify the anchor shape on various levels including:  
 
-1.Network stucture
-2.Loss Function
-3.NMS threshold
-4.Visualizaton
+1.Network stucture  
+2.Loss Function  
+3.NMS threshold  
+4.Visualizaton  
